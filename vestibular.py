@@ -113,7 +113,7 @@ df_filtered = df[ df['Campus']==campus ]
 
 
 # st.dataframe( df_filtered )
-# st.balloons()
+# st.balloons() 
 
 st.header(f'Vestibular IFMG {ano}')
 
@@ -168,15 +168,18 @@ col2.plotly_chart(fig2, use_container_width=True)
 
 
 fig1 = px.bar(df.sort_values(by='Curso'), x="Curso", y="Inscritos", color="Campus",  text_auto='.2s')
+fig1.update_xaxes(title='')
 col1.plotly_chart(fig1, use_container_width=True)
 
 curso_total = df.groupby("Curso")[["Inscritos"]].sum().reset_index().sort_values(by='Inscritos', ascending=False)
 
 fig3 = px.bar(curso_total, x="Curso", y="Inscritos", color="Curso", text_auto='.2s')
+fig3.update_xaxes(title='')
 col3.plotly_chart(fig3, use_container_width=True)
 
 campus_total = df.groupby("Campus")[["Inscritos"]].sum().reset_index().sort_values(by='Inscritos', ascending=False)
 fig4 = px.bar(campus_total, x="Campus", y=["Inscritos"], color="Campus", text_auto='.2s')
+fig4.update_xaxes(title='')
 col4.plotly_chart(fig4, use_container_width=True)
 
 
@@ -184,10 +187,10 @@ col4.plotly_chart(fig4, use_container_width=True)
 
 
 fig7 = px.bar(dffTC, x="Campus", y=options, text_auto='.2s')
-fig7.update_xaxes(side='top')
+fig7.update_xaxes(side='top', title='')
 col7.plotly_chart(fig7, use_container_width=True)
 
 
 fig8 = px.bar(dffGC, x="Campus", y=options, text_auto='.2s')
-fig8.update_xaxes(side='top')
+fig8.update_xaxes(side='top', title='')
 col8.plotly_chart(fig8, use_container_width=True)
