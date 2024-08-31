@@ -175,11 +175,13 @@ curso_total = df.groupby("Curso")[["Inscritos"]].sum().reset_index().sort_values
 
 fig3 = px.bar(curso_total, x="Curso", y="Inscritos", color="Curso", text_auto='.2s')
 fig3.update_xaxes(title='')
+fig3.update_layout(showlegend=False)
 col3.plotly_chart(fig3, use_container_width=True)
 
 campus_total = df.groupby("Campus")[["Inscritos"]].sum().reset_index().sort_values(by='Inscritos', ascending=False)
 fig4 = px.bar(campus_total, x="Campus", y=["Inscritos"], color="Campus", text_auto='.2s')
 fig4.update_xaxes(title='')
+fig4.update_layout(showlegend=False)
 col4.plotly_chart(fig4, use_container_width=True)
 
 
