@@ -1,0 +1,23 @@
+<div>
+	<table cellspacing="0" rules="all" border="1" style="border-collapse:collapse;">
+		<tr>
+			<th scope="col">Processo</th><th scope="col">Cargo</th><th scope="col">Tipo de Vaga</th><th scope="col">Nivel</th><th scope="col">Inscritos</th><th scope="col">Pagos</th><th scope="col">Isen&#231;&#245;es deferidas</th><th scope="col">Inscri&#231;&#245;es homologadas</th>
+		</tr><tr>
+			<td>IFMG - Processo Seletivo Cursos T&#233;cnicos 2022/2</td><td>T&#233;cnico Concomitante em Automa&#231;&#227;o Industrial - Campus Ibirite - Turno: Vespertino (tarde)</td><td>Curso T&#233;cnico Concomitante</td><td>Fundamental</td><td>69</td><td>29</td><td>2</td><td>31</td>
+		</tr><tr>
+			<td>IFMG - Processo Seletivo Cursos T&#233;cnicos 2022/2</td><td>T&#233;cnico Concomitante em Edifica&#231;&#245;es - Campus Congonhas - Turno: Vespertino (tarde)</td><td>Curso T&#233;cnico Concomitante</td><td>Fundamental</td><td>35</td><td>7</td><td>0</td><td>7</td>
+		</tr><tr>
+			<td>IFMG - Processo Seletivo Cursos T&#233;cnicos 2022/2</td><td>T&#233;cnico Concomitante em Mecatr&#244;nica - Campus Ibirite - Turno: Vespertino (tarde)</td><td>Curso T&#233;cnico Concomitante</td><td>Fundamental</td><td>63</td><td>26</td><td>0</td><td>26</td>
+		</tr><tr>
+			<td>IFMG - Processo Seletivo Cursos T&#233;cnicos 2022/2</td><td>T&#233;cnico Concomitante em Minera&#231;&#227;o - Campus Congonhas - Turno: Vespertino (tarde)</td><td>Curso T&#233;cnico Concomitante</td><td>Fundamental</td><td>52</td><td>23</td><td>1</td><td>24</td>
+		</tr><tr>
+			<td>IFMG - Processo Seletivo Cursos T&#233;cnicos 2022/2</td><td>T&#233;cnico Concomitante em Sistemas de Energia Renov&#225;vel - Campus Ibirite - Turno: Vespertino (tarde)</td><td>Curso T&#233;cnico Concomitante</td><td>Fundamental</td><td>41</td><td>11</td><td>0</td><td>11</td>
+		</tr><tr>
+			<td>IFMG - Processo Seletivo Cursos T&#233;cnicos 2022/2</td><td>T&#233;cnico Subsequente em Edifica&#231;&#245;es - Campus Ouro Preto - Turno: Noturno</td><td>Curso T&#233;cnico Subsequente</td><td>M&#233;dio</td><td>46</td><td>14</td><td>1</td><td>15</td>
+		</tr><tr>
+			<td>IFMG - Processo Seletivo Cursos T&#233;cnicos 2022/2</td><td>T&#233;cnico Subsequente em Mec&#226;nica - Campus Congonhas - Turno: Noturno</td><td>Curso T&#233;cnico Subsequente</td><td>M&#233;dio</td><td>68</td><td>18</td><td>1</td><td>19</td>
+		</tr><tr>
+			<td>IFMG - Processo Seletivo Cursos T&#233;cnicos 2022/2</td><td>T&#233;cnico Subsequente em Seguran&#231;a do Trabalho - Campus Ouro Preto - Turno: Noturno</td><td>Curso T&#233;cnico Subsequente</td><td>M&#233;dio</td><td>156</td><td>61</td><td>2</td><td>63</td>
+		</tr>
+	</table>
+</div>

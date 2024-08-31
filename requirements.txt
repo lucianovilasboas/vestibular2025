@@ -1,0 +1,8 @@
+pandas
+streamlit
+plotly
+openpyxl
+# mysqlclient
+# st-gsheets-connection
+# SQLAlchemy
+# mysql-connector-python
