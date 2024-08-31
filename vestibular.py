@@ -112,7 +112,7 @@ campus = st.sidebar.selectbox (
 df_filtered = df[ df['Campus']==campus ]
 
 
-st.dataframe( df_filtered )
+# st.dataframe( df_filtered )
 st.balloons()
 
 st.header(f'Vestibular IFMG {ano}')
