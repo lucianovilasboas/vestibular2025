@@ -1,7 +1,7 @@
 import streamlit as st 
 import pandas as pd 
 import plotly.express as px
-from funcoes import process_file_for_tec, process_file_for_grad, process_file_for_sub, diff
+from funcoes import process_file_for_tec, process_file_for_grad, process_file_for_sub, diff 
 
 st.set_page_config(page_title="Vestibular",  page_icon="📊", layout="wide")
 
