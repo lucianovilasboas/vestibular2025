@@ -27,7 +27,7 @@ df['Modalidade_Curso'] = df['Modalidade'].apply(lambda x: str(x)[:3]) + ' - ' + 
 # st.dataframe( df_filtered )
 # st.balloons() 
 
-st.header(f'Vestibular IFMG {ano}')
+st.header(f'📈 Vestibular IFMG {ano}')
 
 col1, col2 = st.columns(2)
 
@@ -64,7 +64,7 @@ col4 = st.container()
 
 
 
-st.subheader(f'Comparando {ano2} com {ano1} (Todo IFMG)')
+st.subheader(f'Comparando {ano2} com {ano1} (Todo IFMG)', divider='blue')
 
 options = st.multiselect(
     "Situação da inscrição...",
