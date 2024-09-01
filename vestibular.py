@@ -29,10 +29,10 @@ df['Modalidade_Curso'] = df['Modalidade'].apply(lambda x: str(x)[:3]) + ' - ' + 
 
 st.header(f'📈 Vestibular IFMG {ano}')
 
-col1, col2 = st.columns(2)
+cola, colb = st.columns(2)
 
 
-with col1:
+with cola:
     campus = st.selectbox (
     "Campus...",
         df["Campus"].sort_values().unique(),
@@ -40,7 +40,7 @@ with col1:
     placeholder="Selecione o campus...",
     )
 
-with col2:
+with colb:
     situacao = st.selectbox(
         "Situação da inscrição...",
         ["Inscritos","Pagos", "Deferidas","Homologadas"],
