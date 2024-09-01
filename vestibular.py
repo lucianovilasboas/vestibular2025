@@ -60,19 +60,21 @@ st.subheader(f'Total de Inscrições por Cursos (todo IFMG) em {ano}', divider='
 col3 = st.container()
 
 st.subheader(f'Total de Inscrições por Campus em {ano}', divider='rainbow')
+options_col4 = st.multiselect(
+    "Situação da inscrição...",
+    ["Inscritos","Pagos", "Deferidas","Homologadas"],
+    ["Inscritos"], key='options_col4'
+)
 col4 = st.container()
 
 
 
 st.subheader(f'Comparando {ano2} com {ano1} (Todo IFMG)', divider='blue')
-
-options = st.multiselect(
+options_col7 = st.multiselect(
     "Situação da inscrição...",
     ["Inscritos","Pagos", "Deferidas","Homologadas"],
-    ["Inscritos"]
+    ["Inscritos"], key='options_col7'
 )
-
-
 st.subheader(f'Técnico Integrado', divider='rainbow')
 col7 = st.container()
 
@@ -107,8 +109,8 @@ fig3.update_xaxes(title='')
 fig3.update_layout(showlegend=False)
 col3.plotly_chart(fig3, use_container_width=True)
 
-campus_total = df.groupby("Campus")[["Inscritos"]].sum().reset_index().sort_values(by='Inscritos', ascending=False)
-fig4 = px.bar(campus_total, x="Campus", y=["Inscritos"], color="Campus", text_auto='.2s')
+campus_total = df.groupby("Campus")[options_col4].sum().reset_index().sort_values(by=options_col4[0], ascending=False)
+fig4 = px.bar(campus_total, x="Campus", y=options_col4, text_auto='.2s')
 fig4.update_xaxes(title='')
 fig4.update_layout(showlegend=False)
 col4.plotly_chart(fig4, use_container_width=True)
@@ -117,11 +119,11 @@ col4.plotly_chart(fig4, use_container_width=True)
 
 
 
-fig7 = px.bar(dffTC, x="Campus", y=options, text_auto='.2s')
+fig7 = px.bar(dffTC, x="Campus", y=options_col7, text_auto='.2s')
 fig7.update_xaxes(side='top', title='')
 col7.plotly_chart(fig7, use_container_width=True)
 
 
-fig8 = px.bar(dffGC, x="Campus", y=options, text_auto='.2s')
+fig8 = px.bar(dffGC, x="Campus", y=options_col7, text_auto='.2s')
 fig8.update_xaxes(side='top', title='')
 col8.plotly_chart(fig8, use_container_width=True)
