@@ -29,18 +29,23 @@ df['Modalidade_Curso'] = df['Modalidade'].apply(lambda x: str(x)[:3]) + ' - ' + 
 
 st.header(f'Vestibular IFMG {ano}')
 
-campus = st.selectbox (
-   "Campus...",
-    df["Campus"].sort_values().unique(),
-   index=13,
-   placeholder="Selecione o campus...",
-)
+col1, col2 = st.columns(2)
 
-situacao = st.selectbox(
-    "Situação da inscrição...",
-    ["Inscritos","Pagos", "Deferidas","Homologadas"],
-    index=0,
-)
+
+with col1:
+    campus = st.selectbox (
+    "Campus...",
+        df["Campus"].sort_values().unique(),
+    index=13,
+    placeholder="Selecione o campus...",
+    )
+
+with col2:
+    situacao = st.selectbox(
+        "Situação da inscrição...",
+        ["Inscritos","Pagos", "Deferidas","Homologadas"],
+        index=0,
+    )
 
 df_filtered = df[ df['Campus']==campus ]
 
@@ -68,10 +73,10 @@ options = st.multiselect(
 )
 
 
-st.subheader(f'Técnico: diferença de "{", ".join(options)}" de {ano2} para {ano1} (Todo IFMG)', divider='rainbow')
+st.subheader(f'Técnico Integrado', divider='rainbow')
 col7 = st.container()
 
-st.subheader(f'Graduação: diferença de "{", ".join(options)}" de {ano2} para {ano1} (Todo IFMG)', divider='rainbow')
+st.subheader(f'Superior', divider='rainbow')
 col8 = st.container()
 
 
