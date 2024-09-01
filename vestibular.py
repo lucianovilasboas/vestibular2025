@@ -99,7 +99,7 @@ dfMed = process_file_for_tec(f'dados/{ano}_GestaoResultado_ResumoInscricoes_TEC.
 dfGra = process_file_for_grad(f'dados/{ano}_GestaoResultado_ResumoInscricoes_GRAD.xlsx')
 
 df = pd.concat([dfGra, dfMed])
-df['Modalidade_Curso'] = df['Modalidade'].apply(lambda x: str(x)) + ' - ' + df['Curso']
+df['Modalidade_Curso'] = df['Modalidade'].apply(lambda x: str(x)[:3]) + ' - ' + df['Curso'] 
 
 campus = st.sidebar.selectbox (
    "Campus...",
@@ -167,13 +167,13 @@ fig2.update_xaxes(title='')
 col2.plotly_chart(fig2, use_container_width=True)
 
 
-fig1 = px.bar(df.sort_values(by='Curso'), x="Curso", y="Inscritos", color="Campus",  text_auto='.2s')
+fig1 = px.bar(df.sort_values(by='Curso'), x="Modalidade_Curso", y="Inscritos", color="Campus",  text_auto='.2s')
 fig1.update_xaxes(title='')
 col1.plotly_chart(fig1, use_container_width=True)
 
-curso_total = df.groupby("Curso")[["Inscritos"]].sum().reset_index().sort_values(by='Inscritos', ascending=False)
+curso_total = df.groupby("Modalidade_Curso")[["Inscritos"]].sum().reset_index().sort_values(by='Inscritos', ascending=False)
 
-fig3 = px.bar(curso_total, x="Curso", y="Inscritos", color="Curso", text_auto='.2s')
+fig3 = px.bar(curso_total, x="Modalidade_Curso", y="Inscritos", color="Modalidade_Curso", text_auto='.2s')
 fig3.update_xaxes(title='')
 fig3.update_layout(showlegend=False)
 col3.plotly_chart(fig3, use_container_width=True)
