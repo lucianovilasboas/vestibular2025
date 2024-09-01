@@ -50,7 +50,7 @@ def process_file_for_tec(file_path):
     df['Curso'] = cargo_split[0]
     df['Campus'] = cargo_split[1]
     df['Turno'] = cargo_split[2]
-    df['Modalidade'] = df['Tipo de Vaga'] if 'Tipo de Vaga' in df.columns else 'Curso Técnico Integrado'
+    df['Modalidade'] = df['Tipo de Vaga'] if 'Tipo de Vaga' in df.columns else 'Integrado'
     df['FormaIngresso'] = 'Processo Seletivo'
         
     
@@ -60,7 +60,37 @@ def process_file_for_tec(file_path):
                                     .replace("Técnico Integrado em","")
                                     .replace("Técnico Integrado","")
                                     .replace("Técnico Subsequente em","").strip().upper())
-    df['Modalidade'] = df['Modalidade'].apply(lambda r: str(r).replace("Curso Técnico","").strip())
+    
+
+    # Selecting and reordering the desired columns
+    final_df = df[['Curso', 'Modalidade', 'Campus', 'Turno', 'Nivel', 'Inscritos', 'Pagos', 
+                   'Deferidas', 'Homologadas', 'FormaIngresso']]
+    
+    return final_df
+
+
+def process_file_for_sub(file_path):
+    """
+    Function to process files for Subsequente level.
+    Keeps the column name as 'Tipo de Vaga'.
+    """
+    df = pd.read_excel(file_path)
+    
+    # Splitting the "Cargo" column into 'Curso', 'Modalidade', 'Campus', 'Turno', 'Tipo de Vaga'
+    cargo_split = df['Cargo'].str.split(' - ', expand=True)
+    
+    df['Curso'] = cargo_split[0]
+    df['Campus'] = cargo_split[1]
+    df['Turno'] = cargo_split[2]
+    df['Modalidade'] = df['Tipo de Vaga'] if 'Tipo de Vaga' in df.columns else 'Subsequente'
+    df['FormaIngresso'] = 'Processo Seletivo'
+        
+    
+    df.rename({"Isenções deferidas": 'Deferidas', "Inscrições homologadas": 'Homologadas'}, axis=1, inplace=True) 
+    df['Campus'] = df['Campus'].apply(lambda r: r.replace("Campus","").replace("campus","").strip().upper() )
+    df['Curso'] = df['Curso'].apply(lambda r: r
+                                    .replace("Técnico Subsequente","")
+                                    .replace("Técnico Subsequente em","").strip().upper())
     
 
     # Selecting and reordering the desired columns

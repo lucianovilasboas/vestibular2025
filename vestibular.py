@@ -1,7 +1,7 @@
 import streamlit as st 
 import pandas as pd 
 import plotly.express as px
-from funcoes import process_file_for_tec, process_file_for_grad, diff
+from funcoes import process_file_for_tec, process_file_for_grad, process_file_for_sub, diff
 
 st.set_page_config(page_title="Vestibular",  page_icon="📊", layout="wide")
 
@@ -19,8 +19,10 @@ ano = st.sidebar.selectbox (
 
 dfMed = process_file_for_tec(f'dados/{ano}_GestaoResultado_ResumoInscricoes_TEC.xlsx')
 dfGra = process_file_for_grad(f'dados/{ano}_GestaoResultado_ResumoInscricoes_GRAD.xlsx')
+dfSub = process_file_for_sub(f'dados/{ano}_GestaoResultado_ResumoInscricoes_SUB.xlsx')
 
-df = pd.concat([dfGra, dfMed])
+df = pd.concat([dfGra, dfMed, dfSub])
+
 df['Modalidade_Curso'] = df['Modalidade'].apply(lambda x: str(x)[:3]) + ' - ' + df['Curso'] 
 
 
@@ -81,7 +83,9 @@ col7 = st.container()
 st.subheader(f'Superior', divider='rainbow')
 col8 = st.container()
 
-
+st.subheader(f'Subsequente', divider='rainbow')
+col9 = st.container()
+col9.write("Em desenvolvimento...")
 
 
 dffTC = diff(process_file_for_tec(f'dados/{ano1}_GestaoResultado_ResumoInscricoes_TEC.xlsx'), 
@@ -114,8 +118,6 @@ fig4 = px.bar(campus_total, x="Campus", y=options_col4, text_auto='.2s')
 fig4.update_xaxes(title='')
 fig4.update_layout(showlegend=False)
 col4.plotly_chart(fig4, use_container_width=True)
-
-
 
 
 
