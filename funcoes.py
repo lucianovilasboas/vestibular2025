@@ -1,5 +1,6 @@
 import pandas as pd
-
+import os
+from datetime import datetime
 
 def process_file_for_grad(file_path):
     """
@@ -119,3 +120,13 @@ def diff(df1, df2, tipo="Curso"):
 
     return (df22 - df11).reset_index().sort_values("Inscritos")
 
+
+def get_last_modified_file(path):
+
+    # Obtém o tempo de modificação em segundos desde a época
+    timestamp = os.path.getmtime(path)
+
+    # Converte o timestamp para uma data legível
+    data_modificacao = datetime.fromtimestamp(timestamp)
+
+    return data_modificacao.strftime("%d/%m/%Y %H:%M:%S")

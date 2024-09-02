@@ -1,9 +1,11 @@
 import streamlit as st 
 import pandas as pd 
 import plotly.express as px
-from funcoes import process_file_for_tec, process_file_for_grad, process_file_for_sub, diff 
+from funcoes import process_file_for_tec, process_file_for_grad, process_file_for_sub, diff, get_last_modified_file 
+
 
 st.set_page_config(page_title="Vestibular",  page_icon="📊", layout="wide")
+
 
 ano1 = "2024-1"
 ano2 = "2025-1"
@@ -33,6 +35,7 @@ df['Modalidade_Curso'] = df['Modalidade'].apply(lambda x: str(x)[:3]) + ' - ' + 
 # st.balloons() 
 
 st.header(f'📈 Vestibular IFMG {ano}')
+st.write(f"Ultima atualização: {get_last_modified_file('dados/2025-1_GestaoResultado_ResumoInscricoes_TEC.xlsx')}" )
 
 cola, colb = st.columns(2)
 
