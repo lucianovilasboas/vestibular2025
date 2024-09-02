@@ -30,7 +30,7 @@ else:
 
 df['Modalidade_Curso'] = df['Modalidade'].apply(lambda x: str(x)[:3]) + ' - ' + df['Curso'] 
 
-
+ 
 # st.dataframe( df_filtered )
 # st.balloons() 
 

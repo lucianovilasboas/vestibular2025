@@ -121,7 +121,7 @@ def diff(df1, df2, tipo="Curso"):
     return (df22 - df11).reset_index().sort_values("Inscritos")
 
 
-def get_last_modified_file(path):
+def get_last_modified_file(path): 
 
     # Obtém o tempo de modificação em segundos desde a época
     timestamp = os.path.getmtime(path)
