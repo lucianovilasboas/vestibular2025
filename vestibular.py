@@ -4,7 +4,7 @@ import plotly.express as px
 from funcoes import process_file_for_tec, process_file_for_grad, process_file_for_sub, diff, get_last_modified_file 
 
 
-st.set_page_config(page_title="Vestibular",  page_icon="📊", layout="wide")
+st.set_page_config(page_title="Vestibular IFMG 2025",  page_icon="📊", layout="wide")
 
 
 ano1 = "2024-1"
