@@ -128,7 +128,7 @@ def get_last_modified_file(path):
     timestamp = os.path.getmtime(path)
 
     # Converte o timestamp para uma data legível
-    data_modificacao = datetime.fromtimestamp(timestamp)
+    data_modificacao = datetime.fromtimestamp(timestamp) 
 
     # Define o fuso horário para "America/Sao_Paulo"
     fuso_horario = pytz.timezone("America/Sao_Paulo")
