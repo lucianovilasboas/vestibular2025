@@ -56,7 +56,7 @@ def process_file_for_tec(file_path):
     # Splitting the "Cargo" column into 'Curso', 'Modalidade', 'Campus', 'Turno', 'Tipo de Vaga'
     cargo_split = df['Cargo'].str.split(' - ', expand=True)
     
-    df['Curso'] = cargo_split[0]
+    df['Curso'] = cargo_split[0] 
     df['Campus'] = cargo_split[1]
     df['Turno'] = cargo_split[2]
     df['Modalidade'] = df['Tipo de Vaga'] if 'Tipo de Vaga' in df.columns else 'Integrado'

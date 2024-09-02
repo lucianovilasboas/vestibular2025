@@ -127,7 +127,7 @@ col4.plotly_chart(fig4, use_container_width=True)
 modalidade_total = df.groupby("Modalidade")[options_col4].sum().reset_index().sort_values(by=options_col4[0], ascending=False)
 fig10 = px.bar(modalidade_total, x="Modalidade", y=options_col4, text_auto='.2s')
 fig10.update_xaxes(title='')
-fig10.update_layout(showlegend=False)
+fig10.update_layout(showlegend=False) 
 col10.plotly_chart(fig10, use_container_width=True)
 
 
