@@ -19,9 +19,9 @@ ano = st.sidebar.selectbox (
 
 dfMed = process_file_for_tec(f'dados/{ano}_GestaoResultado_ResumoInscricoes_TEC.xlsx')
 dfGra = process_file_for_grad(f'dados/{ano}_GestaoResultado_ResumoInscricoes_GRAD.xlsx')
-dfSub = process_file_for_sub(f'dados/{ano}_GestaoResultado_ResumoInscricoes_SUB.xlsx')
 
 if ano == ano2:
+   dfSub = process_file_for_sub(f'dados/{ano}_GestaoResultado_ResumoInscricoes_SUB.xlsx')  
    df = pd.concat([dfGra, dfMed, dfSub])
 else:
     df = pd.concat([dfGra, dfMed])
