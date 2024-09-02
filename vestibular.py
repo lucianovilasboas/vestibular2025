@@ -103,23 +103,32 @@ dffGC = diff(process_file_for_grad(f'dados/{ano1}_GestaoResultado_ResumoInscrico
 
 fig2 = px.bar(df_filtered, x="Modalidade_Curso", y=situacao,  barmode="group", color="FormaIngresso", text_auto='.2s')
 fig2.update_xaxes(title='')
+fig2.update_yaxes(tickformat=",d")
+fig2.update_traces(texttemplate='%{value:.0f}')
 col2.plotly_chart(fig2, use_container_width=True)
 
 
 fig1 = px.bar(df.sort_values(by='Curso'), x="Modalidade_Curso", y="Inscritos", color="Campus",  text_auto='.2s')
 fig1.update_xaxes(title='')
+fig1.update_yaxes(tickformat=",d")
+fig1.update_traces(texttemplate='%{value:.0f}')
 col1.plotly_chart(fig1, use_container_width=True)
+
 
 curso_total = df.groupby("Modalidade_Curso")[["Inscritos"]].sum().reset_index().sort_values(by='Inscritos', ascending=False)
 
 fig3 = px.bar(curso_total, x="Modalidade_Curso", y="Inscritos", color="Modalidade_Curso", text_auto='.2s')
 fig3.update_xaxes(title='')
+fig3.update_yaxes(tickformat=",d")
+fig3.update_traces(texttemplate='%{value:.0f}')
 fig3.update_layout(showlegend=False)
 col3.plotly_chart(fig3, use_container_width=True)
 
 campus_total = df.groupby("Campus")[options_col4].sum().reset_index().sort_values(by=options_col4[0], ascending=False)
 fig4 = px.bar(campus_total, x="Campus", y=options_col4, text_auto='.2s')
 fig4.update_xaxes(title='')
+fig4.update_yaxes(tickformat=",d")
+fig4.update_traces(texttemplate='%{value:.0f}')
 fig4.update_layout(showlegend=False)
 col4.plotly_chart(fig4, use_container_width=True)
 
@@ -127,17 +136,23 @@ col4.plotly_chart(fig4, use_container_width=True)
 modalidade_total = df.groupby("Modalidade")[options_col4].sum().reset_index().sort_values(by=options_col4[0], ascending=False)
 fig10 = px.bar(modalidade_total, x="Modalidade", y=options_col4, text_auto='.2s')
 fig10.update_xaxes(title='')
+fig10.update_yaxes(tickformat=",d")
+fig10.update_traces(texttemplate='%{value:.0f}')
 fig10.update_layout(showlegend=False) 
 col10.plotly_chart(fig10, use_container_width=True)
 
 
 fig7 = px.bar(dffTC, x="Campus", y=options_col7, text_auto='.2s')
 fig7.update_xaxes(side='top', title='')
+fig7.update_yaxes(tickformat=",d")
+fig7.update_traces(texttemplate='%{value:.0f}')
 col7.plotly_chart(fig7, use_container_width=True)
 
 
 fig8 = px.bar(dffGC, x="Campus", y=options_col7, text_auto='.2s')
 fig8.update_xaxes(side='top', title='')
+fig8.update_yaxes(tickformat=",d")
+fig8.update_traces(texttemplate='%{value:.0f}')
 col8.plotly_chart(fig8, use_container_width=True)
 
 
