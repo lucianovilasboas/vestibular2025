@@ -10,7 +10,7 @@ def process_file_for_grad(file_path):
     df = pd.read_excel(file_path)
     
     # Splitting the "Cargo" column into 'Curso', 'Modalidade', 'Campus', 'Turno', 'Tipo de Vaga'
-    cargo_split = df['Cargo'].str.split(' - ', expand=True)
+    cargo_split = df['Cargo'].str.split(r' - |Campos', expand=True)
     
     if cargo_split.shape[1] == 3:
         df['Curso'] = cargo_split[0]
