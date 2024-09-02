@@ -60,7 +60,7 @@ def process_file_for_tec(file_path):
                                     .replace("Técnico Integrado em","")
                                     .replace("Técnico Integrado","")
                                     .replace("Técnico Subsequente em","").strip().upper())
-    df['Modalidade'] = df['Modalidade'].apply(lambda r: r.replace("Curso Técnico","").strip())
+    df['Modalidade'] = df['Modalidade'].apply(lambda r: str(r).replace("Curso Técnico","").strip())
 
     # Selecting and reordering the desired columns
     final_df = df[['Curso', 'Modalidade', 'Campus', 'Turno', 'Nivel', 'Inscritos', 'Pagos', 
