@@ -129,4 +129,4 @@ def get_last_modified_file(path):
     # Converte o timestamp para uma data legível
     data_modificacao = datetime.fromtimestamp(timestamp)
 
-    return data_modificacao.strftime("%d/%m/%Y %H:%M:%S")
+    return data_modificacao.strftime("%d/%m/%Y")
