@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 from datetime import datetime
+import pytz
 
 def process_file_for_grad(file_path):
     """
@@ -129,4 +130,9 @@ def get_last_modified_file(path):
     # Converte o timestamp para uma data legível
     data_modificacao = datetime.fromtimestamp(timestamp)
 
-    return data_modificacao.strftime("%d/%m/%Y")
+    # Define o fuso horário para "America/Sao_Paulo"
+    fuso_horario = pytz.timezone("America/Sao_Paulo")
+
+    data_modificacao = data_modificacao.astimezone(fuso_horario)
+
+    return data_modificacao.strftime("%d/%m/%Y %H:%M:%S")
