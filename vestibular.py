@@ -72,7 +72,8 @@ options_col4 = st.multiselect(
 )
 col4 = st.container()
 
-
+st.subheader(f'Total de Inscrições por Edital em {ano}', divider='rainbow')
+col10 = st.container()
 
 st.subheader(f'Comparando {ano2} com {ano1} (Todo IFMG)', divider='blue')
 options_col7 = st.multiselect(
@@ -80,13 +81,13 @@ options_col7 = st.multiselect(
     ["Inscritos","Pagos", "Deferidas","Homologadas"],
     ["Inscritos"], key='options_col7'
 )
-st.subheader(f'Técnico Integrado', divider='rainbow')
+st.subheader(f'Técnico Integrado ({ano2} - {ano1})', divider='rainbow')
 col7 = st.container()
 
-st.subheader(f'Superior', divider='rainbow')
+st.subheader(f'Superior ({ano2} - {ano1})', divider='rainbow')
 col8 = st.container()
 
-st.subheader(f'Subsequente', divider='rainbow')
+st.subheader(f'Subsequente ({ano2} - {ano1})', divider='rainbow')
 col9 = st.container()
 col9.write("Em desenvolvimento...")
 
@@ -123,6 +124,12 @@ fig4.update_layout(showlegend=False)
 col4.plotly_chart(fig4, use_container_width=True)
 
 
+modalidade_total = df.groupby("Modalidade")[options_col4].sum().reset_index().sort_values(by=options_col4[0], ascending=False)
+fig10 = px.bar(modalidade_total, x="Modalidade", y=options_col4, text_auto='.2s')
+fig10.update_xaxes(title='')
+fig10.update_layout(showlegend=False)
+col10.plotly_chart(fig10, use_container_width=True)
+
 
 fig7 = px.bar(dffTC, x="Campus", y=options_col7, text_auto='.2s')
 fig7.update_xaxes(side='top', title='')
@@ -132,3 +139,5 @@ col7.plotly_chart(fig7, use_container_width=True)
 fig8 = px.bar(dffGC, x="Campus", y=options_col7, text_auto='.2s')
 fig8.update_xaxes(side='top', title='')
 col8.plotly_chart(fig8, use_container_width=True)
+
+
