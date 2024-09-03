@@ -51,7 +51,7 @@ df_soma = pd.DataFrame(soma_colunas, columns=["total"]).reset_index()
 colx = st.container()
 figx = px.bar(df_soma, x="total", y="index", color="index", text_auto='.2s')
 figx.update_xaxes(title='')
-figx.update_yaxes(tickformat=",d", title='', tickfont=dict(size=20))
+figx.update_yaxes(tickformat=",d", title='', tickfont=dict(size=16))
 figx.update_traces(texttemplate='%{value:.0f}',textfont_size=24)
 figx.update_layout(showlegend=False)
 colx.plotly_chart(figx, use_container_width=True) 
@@ -96,29 +96,53 @@ col4 = st.container()
 st.subheader(f'Total de Inscrições por Edital em {ano}', divider='rainbow')
 col10 = st.container()
 
-st.subheader(f'Comparando {ano2} com {ano1} (Todo IFMG)', divider='blue')
-options_col7 = st.multiselect(
-    "Situação da inscrição...",
-    ["Inscritos","Pagos", "Deferidas","Homologadas"],
-    ["Inscritos"], key='options_col7'
-)
-st.subheader(f'Técnico Integrado ({ano2} - {ano1})', divider='rainbow')
+
+st.subheader(f'Comparando (Todo IFMG)', divider='blue')
+
+col_ano1, col_ano2, options_col7 = st.columns(3)
+   
+with col_ano1:
+    ano_sel1 = st.selectbox (
+    "Ano 1...",
+        [ano0, ano1, ano2 ],
+    index=0,
+    placeholder="Selecione o ano 1...",
+    )
+
+with col_ano2:
+    ano_sel2 = st.selectbox (
+    "Ano 2...",
+        [ano2, ano1, ano0],
+    index=1,
+    placeholder="Selecione o ano 2...",
+    )
+
+with options_col7:
+    options_col7 = st.multiselect(
+        "Situação da inscrição...",
+        ["Inscritos","Pagos", "Deferidas","Homologadas"],
+        ["Inscritos"], key='options_col7'
+    )
+
+
+
+st.subheader(f'Técnico Integrado: evolução de {ano_sel1} para {ano_sel2}.', divider='rainbow')
 col7 = st.container()
 
-st.subheader(f'Superior ({ano2} - {ano1})', divider='rainbow')
+st.subheader(f'Superior: evolução de {ano_sel1} para {ano_sel2}.', divider='rainbow')
 col8 = st.container()
 
-st.subheader(f'Subsequente ({ano2} - {ano1})', divider='rainbow')
-col9 = st.container()
-col9.write("Em desenvolvimento...")
+# st.subheader(f'Subsequente ({ano_sel1} com {ano_sel2})', divider='rainbow')
+# col9 = st.container()
+# col9.write("Em desenvolvimento...")
 
 
-dffTC = diff(process_file_for_tec(f'dados/{ano1}_GestaoResultado_ResumoInscricoes_TEC.xlsx'), 
-            process_file_for_tec(f'dados/{ano2}_GestaoResultado_ResumoInscricoes_TEC.xlsx'), 
+dffTC = diff(process_file_for_tec(f'dados/{ano_sel1}_GestaoResultado_ResumoInscricoes_TEC.xlsx'), 
+            process_file_for_tec(f'dados/{ano_sel2}_GestaoResultado_ResumoInscricoes_TEC.xlsx'), 
             "Campus")
 
-dffGC = diff(process_file_for_grad(f'dados/{ano1}_GestaoResultado_ResumoInscricoes_GRAD.xlsx'), 
-            process_file_for_grad(f'dados/{ano2}_GestaoResultado_ResumoInscricoes_GRAD.xlsx'), 
+dffGC = diff(process_file_for_grad(f'dados/{ano_sel1}_GestaoResultado_ResumoInscricoes_GRAD.xlsx'), 
+            process_file_for_grad(f'dados/{ano_sel2}_GestaoResultado_ResumoInscricoes_GRAD.xlsx'), 
             "Campus")
 
 

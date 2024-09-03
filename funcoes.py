@@ -119,7 +119,8 @@ def diff(df1, df2, tipo="Curso"):
     df22 = df2.groupby(tipo)[["Inscritos","Pagos", "Deferidas","Homologadas"]].sum().reset_index().sort_values(by='Inscritos', ascending=False)
     df22.set_index(tipo, inplace=True)
 
-    return (df22 - df11).reset_index().sort_values("Inscritos") 
+    dfdiff = df22 - df11
+    return dfdiff.reset_index().sort_values("Inscritos")
 
 
 def get_last_modified_file(path): 
