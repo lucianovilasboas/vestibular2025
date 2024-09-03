@@ -54,7 +54,7 @@ figx.update_xaxes(title='')
 figx.update_yaxes(tickformat=",d", title='', tickfont=dict(size=20))
 figx.update_traces(texttemplate='%{value:.0f}',textfont_size=24)
 figx.update_layout(showlegend=False)
-colx.plotly_chart(figx, use_container_width=True)
+colx.plotly_chart(figx, use_container_width=True) 
 
 cola, colb = st.columns(2)
 
