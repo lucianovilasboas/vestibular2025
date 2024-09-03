@@ -6,14 +6,15 @@ from funcoes import process_file_for_tec, process_file_for_grad, process_file_fo
 
 st.set_page_config(page_title="Vestibular IFMG 2025",  page_icon="📊", layout="wide")
 
-
+# anox = "2022-1"
+ano0 = "2023-1"
 ano1 = "2024-1"
 ano2 = "2025-1"
 
 
 ano = st.sidebar.selectbox (
    "Ano...",
-    [ano2, ano1],
+    [ano2, ano1, ano0],
    index=0,
    placeholder="Selecione um ano...",
 )
@@ -22,11 +23,11 @@ ano = st.sidebar.selectbox (
 dfMed = process_file_for_tec(f'dados/{ano}_GestaoResultado_ResumoInscricoes_TEC.xlsx')
 dfGra = process_file_for_grad(f'dados/{ano}_GestaoResultado_ResumoInscricoes_GRAD.xlsx')
 
-if ano == ano2:
+if ano == "2025-1":
    dfSub = process_file_for_sub(f'dados/{ano}_GestaoResultado_ResumoInscricoes_SUB.xlsx')  
    df = pd.concat([dfGra, dfMed, dfSub])
 else:
-    df = pd.concat([dfGra, dfMed])
+   df = pd.concat([dfGra, dfMed])
 
 df['Modalidade_Curso'] = df['Modalidade'].apply(lambda x: str(x)[:3]) + ' - ' + df['Curso'] 
 
@@ -37,14 +38,31 @@ df['Modalidade_Curso'] = df['Modalidade'].apply(lambda x: str(x)[:3]) + ' - ' + 
 st.header(f'📈 Vestibular IFMG {ano}')
 st.write(f"Ultima atualização: {get_last_modified_file('dados/2025-1_GestaoResultado_ResumoInscricoes_TEC.xlsx')}" )
 
-cola, colb = st.columns(2)
 
+st.subheader(f'Total de Inscrições em {ano}', divider='rainbow')
+# col0 = st.container()
+soma_colunas = df[["Inscritos", "Pagos", "Deferidas", "Homologadas"]].sum()
+df_soma = pd.DataFrame(soma_colunas, columns=["total"]).reset_index()
+# fig0 = px.pie(df_soma, values='total', names='index')
+# fig0.update_traces(textinfo='value+percent', textfont_size=22)
+# col0.plotly_chart(fig0, use_container_width=True)
+
+
+colx = st.container()
+figx = px.bar(df_soma, x="total", y="index", color="index", text_auto='.2s')
+figx.update_xaxes(title='')
+figx.update_yaxes(tickformat=",d", title='', tickfont=dict(size=20))
+figx.update_traces(texttemplate='%{value:.0f}',textfont_size=24)
+figx.update_layout(showlegend=False)
+colx.plotly_chart(figx, use_container_width=True)
+
+cola, colb = st.columns(2)
 
 with cola:
     campus = st.selectbox (
     "Campus...",
         df["Campus"].sort_values().unique(),
-    index=13,
+    index=0,
     placeholder="Selecione o campus...",
     )
 
