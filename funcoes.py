@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 import pytz
 
-def process_file_for_grad(file_path):
+def process_file_for_superior(file_path):
     """
     Function to process files for Graduação (Superior).
     Renames 'Tipo de Vaga' to 'Forma de Ingresso' for Graduação level.
@@ -50,7 +50,7 @@ def process_file_for_grad(file_path):
     return final_df
 
 
-def process_file_for_tec(file_path):
+def process_file_for_integrado(file_path):
     """
     Function to process files for Técnico level.
     Keeps the column name as 'Tipo de Vaga'.
@@ -85,7 +85,7 @@ def process_file_for_tec(file_path):
     return final_df
 
 
-def process_file_for_sub(file_path):
+def process_file_for_subsequente(file_path):
     """
     Function to process files for Subsequente level.
     Keeps the column name as 'Tipo de Vaga'.

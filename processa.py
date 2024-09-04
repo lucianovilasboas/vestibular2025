@@ -2,7 +2,7 @@ import pandas as pd
 import os
 from datetime import datetime
 import shutil 
-from funcoes import process_file_for_grad, process_file_for_tec, process_file_for_sub
+from funcoes import process_file_for_subsequente, process_file_for_integrado, process_file_for_superior
 
 
 if __name__ == "__main__":
@@ -45,17 +45,14 @@ if __name__ == "__main__":
             # IFMG - Processo Seletivo Cursos Técnicos Subsequentes 2025/1 -> Subsequente 
             first_row = df.iloc[0] # pega a primeira linha do dataframe
             if "Graduação" in first_row["Processo"]:
-                df = process_file_for_grad(file_path)
+                df = process_file_for_superior(file_path)
                 name_ext = "Superior"
-                tipo_ext = 'GRAD'
             elif "Integrados" in first_row["Processo"]:
-                df = process_file_for_tec(file_path)
+                df = process_file_for_integrado(file_path)
                 name_ext = "Integrado"
-                tipo_ext = 'TEC'
             elif "Subsequentes" in first_row["Processo"]:
-                df = process_file_for_sub(file_path)
+                df = process_file_for_subsequente(file_path)
                 name_ext = "Subsequente"
-                tipo_ext = 'SUB'
             else:
                 print(f"{timestamp_str} - Arquivo {file} não foi processado. Formato não reconhecido.")
                 continue
@@ -74,7 +71,7 @@ if __name__ == "__main__":
             # Copia o arquivo para a pasta dados e renomeia para 
             # 2025-1_GestaoResultado_ResumoInscricoes_X.xlsx
             # com X sendo "GRAD", "TEC" ou "SUB" dependendo do tipo de curso na variavel name_ext
-            shutil.copy(file_path, os.path.join(dados_folder, f"2025-1_GestaoResultado_ResumoInscricoes_{tipo_ext}.xlsx"))
+            shutil.copy(file_path, os.path.join(dados_folder, f"2025-1_GestaoResultado_ResumoInscricoes_{name_ext}.xlsx"))
 
             # Move e renomeia o arquivo para a pasta processados
             shutil.move(file_path, new_file_path)

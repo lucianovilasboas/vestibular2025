@@ -1,7 +1,7 @@
 import streamlit as st 
 import pandas as pd 
 import plotly.express as px
-from funcoes import process_file_for_tec, process_file_for_grad, process_file_for_sub, diff, get_last_modified_file 
+from funcoes import process_file_for_integrado, process_file_for_superior, process_file_for_subsequente, diff, get_last_modified_file 
 
 
 st.set_page_config(page_title="Vestibular IFMG 2025",  page_icon="📊", layout="wide")
@@ -11,7 +11,6 @@ ano0 = "2023-1"
 ano1 = "2024-1"
 ano2 = "2025-1"
 
-
 ano = st.sidebar.selectbox (
    "Ano...",
     [ano2, ano1, ano0],
@@ -19,12 +18,11 @@ ano = st.sidebar.selectbox (
    placeholder="Selecione um ano...",
 )
 
-
-dfMed = process_file_for_tec(f'dados/{ano}_GestaoResultado_ResumoInscricoes_TEC.xlsx')
-dfGra = process_file_for_grad(f'dados/{ano}_GestaoResultado_ResumoInscricoes_GRAD.xlsx')
+dfMed = process_file_for_integrado(f'dados/{ano}_GestaoResultado_ResumoInscricoes_Integrado.xlsx')
+dfGra = process_file_for_superior(f'dados/{ano}_GestaoResultado_ResumoInscricoes_Superior.xlsx')
 
 if ano == "2025-1":
-   dfSub = process_file_for_sub(f'dados/{ano}_GestaoResultado_ResumoInscricoes_SUB.xlsx')  
+   dfSub = process_file_for_subsequente(f'dados/{ano}_GestaoResultado_ResumoInscricoes_Subsequente.xlsx')  
    df = pd.concat([dfGra, dfMed, dfSub])
 else:
    df = pd.concat([dfGra, dfMed])
@@ -38,7 +36,7 @@ df_all = pd.read_excel("dados/processed/all_data.xlsx")
 # st.balloons() 
 
 st.header(f'📈 Vestibular IFMG {ano}')
-st.write(f"Ultima atualização: {get_last_modified_file('dados/2025-1_GestaoResultado_ResumoInscricoes_TEC.xlsx')}" )
+st.write(f"Ultima atualização: {get_last_modified_file('dados/2025-1_GestaoResultado_ResumoInscricoes_Integrado.xlsx')}" )
 
 
 st.subheader(f'Total de Inscrições em {ano}', divider='rainbow')
@@ -165,12 +163,12 @@ col8 = st.container()
 # col9.write("Em desenvolvimento...")
 
 
-dffTC = diff(process_file_for_tec(f'dados/{ano_sel1}_GestaoResultado_ResumoInscricoes_TEC.xlsx'), 
-            process_file_for_tec(f'dados/{ano_sel2}_GestaoResultado_ResumoInscricoes_TEC.xlsx'), 
+dffTC = diff(process_file_for_integrado(f'dados/{ano_sel1}_GestaoResultado_ResumoInscricoes_Integrado.xlsx'), 
+            process_file_for_integrado(f'dados/{ano_sel2}_GestaoResultado_ResumoInscricoes_Integrado.xlsx'), 
             "Campus")
 
-dffGC = diff(process_file_for_grad(f'dados/{ano_sel1}_GestaoResultado_ResumoInscricoes_GRAD.xlsx'), 
-            process_file_for_grad(f'dados/{ano_sel2}_GestaoResultado_ResumoInscricoes_GRAD.xlsx'), 
+dffGC = diff(process_file_for_superior(f'dados/{ano_sel1}_GestaoResultado_ResumoInscricoes_Superior.xlsx'), 
+            process_file_for_superior(f'dados/{ano_sel2}_GestaoResultado_ResumoInscricoes_Superior.xlsx'), 
             "Campus")
 
 
