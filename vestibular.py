@@ -181,12 +181,14 @@ fig2.update_traces(texttemplate='%{value:.0f}')
 col2.plotly_chart(fig2, use_container_width=True)
 
 
-fig22 = px.line(df_filtered2, title=f"Campus {campus}", x="Timestamp", y=situacao,  color="Curso")
+fig22 = px.line(df_filtered2, title=f"Campus {campus}", x="Timestamp", y=situacao, color="Curso", text=situacao)
 fig22.update_xaxes(title='')
 fig22.update_yaxes(tickformat=",d")
-fig22.update_traces(texttemplate='%{value:.0f}')
+# Exibe os valores no gráfico
+fig22.update_traces(texttemplate='%{text:.0f}', textposition="top right")
 fig22.update_layout(hovermode="x")
 col22.plotly_chart(fig22, use_container_width=True)
+
 
 
 
