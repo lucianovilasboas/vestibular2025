@@ -1,0 +1,34 @@
+# Ignore Python files
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.pyi
+*.pyw
+*.pyz
+*.pyzw
+
+# Ignore Jupyter Notebook files
+.ipynb_checkpoints/
+
+# Ignore Python virtual environment files
+venv/
+
+# Aceite apenas o arquivo all_data.xlsx da pasta dados/processed e ignore todos os outros arquivos 
+dados/processed/*
+!dados/processed/all_data.xlsx
+
+# Ignore a pasta input e a pasta backup
+input/
+backup/
+
+# Ignore testes.ipynb
+testes.ipynb
+
+# Ignore o arquivo cron.txt
+cron.txt
+
+# Ignore todos os arquivos .xls da pasta dados
+dados/*.xls
+
+

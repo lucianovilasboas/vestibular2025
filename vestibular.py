@@ -31,7 +31,9 @@ else:
 
 df['Modalidade_Curso'] = df['Modalidade'].apply(lambda x: str(x)[:3]) + ' - ' + df['Curso'] 
 
- 
+
+df_all = pd.read_excel("dados/processed/all_data.xlsx")
+
 # st.dataframe( df_filtered )
 # st.balloons() 
 
@@ -41,7 +43,7 @@ st.write(f"Ultima atualização: {get_last_modified_file('dados/2025-1_GestaoRes
 
 st.subheader(f'Total de Inscrições em {ano}', divider='rainbow')
 # col0 = st.container()
-soma_colunas = df[["Inscritos", "Pagos", "Deferidas", "Homologadas"]].sum()
+soma_colunas = df[["Inscritos", "Pagos", "Isenções deferidas", "Inscrições homologadas"]].sum()
 df_soma = pd.DataFrame(soma_colunas, columns=["total"]).reset_index()
 # fig0 = px.pie(df_soma, values='total', names='index')
 # fig0.update_traces(textinfo='value+percent', textfont_size=22)
@@ -66,18 +68,45 @@ with cola:
     placeholder="Selecione o campus...",
     )
 
-with colb:
-    situacao = st.selectbox(
-        "Situação da inscrição...",
-        ["Inscritos","Pagos", "Deferidas","Homologadas"],
-        index=0,
-    )
-
 df_filtered = df[ df['Campus']==campus ]
 
 
+with colb:
+    situacao = st.selectbox(
+        "Situação da inscrição...",
+        ["Inscritos","Pagos", "Isenções deferidas","Inscrições homologadas"],
+        index=3,
+    )
+
+
+
+
+
 st.subheader(f'Total de {situacao} no Campus {campus} em {ano}', divider='rainbow')
+
 col2 = st.container()
+
+colc, cold = st.columns(2)
+with colc:
+    modalidade = st.selectbox(
+        "Modalidade...",
+        df_filtered["Modalidade"].sort_values().unique(),
+        index=0,
+    )
+
+df_filtered_x = df_filtered[ df_filtered['Modalidade']==modalidade ]
+
+with cold:
+    forma = st.selectbox(
+        "Forma de ingresso...",
+        df_filtered_x["FormaIngresso"].sort_values().unique(),
+        index=0,
+    )    
+
+df_filtered2 = df_all[(df_all["Modalidade"] == modalidade) & (df_all["Campus"] == campus)&(df_all["FormaIngresso"] == forma)]
+col22 = st.container()
+
+
 
 st.subheader(f'Total de Inscrições por Cursos e campus (todo IFMG) em {ano}', divider='rainbow')
 col1 = st.container()
@@ -88,7 +117,7 @@ col3 = st.container()
 st.subheader(f'Total de Inscrições por Campus em {ano}', divider='rainbow')
 options_col4 = st.multiselect(
     "Situação da inscrição...",
-    ["Inscritos","Pagos", "Deferidas","Homologadas"],
+    ["Inscritos","Pagos", "Isenções deferidas","Inscrições homologadas"],
     ["Inscritos"], key='options_col4'
 )
 col4 = st.container()
@@ -105,7 +134,7 @@ with col_ano1:
     ano_sel1 = st.selectbox (
     "Ano 1...",
         [ano0, ano1, ano2 ],
-    index=0,
+    index=1,
     placeholder="Selecione o ano 1...",
     )
 
@@ -113,17 +142,16 @@ with col_ano2:
     ano_sel2 = st.selectbox (
     "Ano 2...",
         [ano2, ano1, ano0],
-    index=1,
+    index=0,
     placeholder="Selecione o ano 2...",
     )
 
 with options_col7:
     options_col7 = st.multiselect(
         "Situação da inscrição...",
-        ["Inscritos","Pagos", "Deferidas","Homologadas"],
+        ["Inscritos","Pagos", "Isenções deferidas","Inscrições homologadas"],
         ["Inscritos"], key='options_col7'
     )
-
 
 
 st.subheader(f'Técnico Integrado: evolução de {ano_sel1} para {ano_sel2}.', divider='rainbow')
@@ -151,6 +179,15 @@ fig2.update_xaxes(title='')
 fig2.update_yaxes(tickformat=",d")
 fig2.update_traces(texttemplate='%{value:.0f}')
 col2.plotly_chart(fig2, use_container_width=True)
+
+
+fig22 = px.line(df_filtered2, title=f"Campus {campus}", x="Timestamp", y=situacao,  color="Curso")
+fig22.update_xaxes(title='')
+fig22.update_yaxes(tickformat=",d")
+fig22.update_traces(texttemplate='%{value:.0f}')
+fig22.update_layout(hovermode="x")
+col22.plotly_chart(fig22, use_container_width=True)
+
 
 
 fig1 = px.bar(df.sort_values(by='Curso'), x="Modalidade_Curso", y="Inscritos", color="Campus",  text_auto='.2s')

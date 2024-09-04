@@ -11,7 +11,7 @@ def process_file_for_grad(file_path):
     df = pd.read_excel(file_path)
     
     # Splitting the "Cargo" column into 'Curso', 'Modalidade', 'Campus', 'Turno', 'Tipo de Vaga'
-    cargo_split = df['Cargo'].str.split(r' - |Campos', expand=True)
+    cargo_split = df['Cargo'].str.split(r' - ', expand=True)
     
     if cargo_split.shape[1] == 3:
         df['Curso'] = cargo_split[0]
@@ -27,7 +27,7 @@ def process_file_for_grad(file_path):
         df['FormaIngresso'] = cargo_split[4]
     
 
-    df.rename({"Isenções deferidas": 'Deferidas', "Inscrições homologadas": 'Homologadas'}, axis=1, inplace=True) 
+    # df.rename({"Isenções deferidas": 'Deferidas', "Inscrições homologadas": 'Homologadas'}, axis=1, inplace=True) 
     df['Campus'] = df['Campus'].apply(lambda r: r.replace("Campus","").replace("campus","").strip().upper() )
     df['Curso'] = df['Curso'].apply(lambda r: r
                                     .replace("Tecnologia em","").strip().upper())
@@ -41,9 +41,11 @@ def process_file_for_grad(file_path):
         return "Bacharelado"    
 
     df["Modalidade"] =  df["Curso"].apply(tipo_curso)
+    # Primeira letra maiúscula 
+    df["Nivel"] = df["Nivel"].apply(lambda x: x.capitalize())
 
     # Selecting and reordering the desired columns
-    final_df = df[['Curso', 'Modalidade', 'Campus', 'Turno', 'Nivel', 'Inscritos', 'Pagos', 'Deferidas', 'Homologadas', 'FormaIngresso']]
+    final_df = df[['Curso', 'Modalidade', 'Campus', 'Turno', 'Nivel', 'Inscritos', 'Pagos', 'Isenções deferidas', 'Inscrições homologadas', 'FormaIngresso']]
     
     return final_df
 
@@ -65,7 +67,7 @@ def process_file_for_tec(file_path):
     df['FormaIngresso'] = 'Processo Seletivo'
         
     
-    df.rename({"Isenções deferidas": 'Deferidas', "Inscrições homologadas": 'Homologadas'}, axis=1, inplace=True) 
+    # df.rename({"Isenções deferidas": 'Deferidas', "Inscrições homologadas": 'Homologadas'}, axis=1, inplace=True) 
     df['Campus'] = df['Campus'].apply(lambda r: r.replace("Campus","").replace("campus","").strip().upper() )
     df['Curso'] = df['Curso'].apply(lambda r: r
                                     .replace("Técnico Integrado em","")
@@ -73,9 +75,12 @@ def process_file_for_tec(file_path):
                                     .replace("Técnico Subsequente em","").strip().upper())
     df['Modalidade'] = df['Modalidade'].apply(lambda r: str(r).replace("Curso Técnico","").strip())
 
+    # Primeira letra maiúscula 
+    df["Nivel"] = df["Nivel"].apply(lambda x: x.capitalize())
+
     # Selecting and reordering the desired columns
     final_df = df[['Curso', 'Modalidade', 'Campus', 'Turno', 'Nivel', 'Inscritos', 'Pagos', 
-                   'Deferidas', 'Homologadas', 'FormaIngresso']]
+                   'Isenções deferidas', 'Inscrições homologadas', 'FormaIngresso']]
     
     return final_df
 
@@ -97,26 +102,28 @@ def process_file_for_sub(file_path):
     df['FormaIngresso'] = 'Processo Seletivo'
         
     
-    df.rename({"Isenções deferidas": 'Deferidas', "Inscrições homologadas": 'Homologadas'}, axis=1, inplace=True) 
+    # df.rename({"Isenções deferidas": 'Deferidas', "Inscrições homologadas": 'Homologadas'}, axis=1, inplace=True) 
     df['Campus'] = df['Campus'].apply(lambda r: r.replace("Campus","").replace("campus","").strip().upper() )
     df['Curso'] = df['Curso'].apply(lambda r: r
                                     .replace("Técnico Subsequente","")
                                     .replace("Técnico Subsequente em","").strip().upper())
     
+    # Primeira letra maiúscula 
+    df["Nivel"] = df["Nivel"].apply(lambda x: x.capitalize())
 
     # Selecting and reordering the desired columns
     final_df = df[['Curso', 'Modalidade', 'Campus', 'Turno', 'Nivel', 'Inscritos', 'Pagos', 
-                   'Deferidas', 'Homologadas', 'FormaIngresso']]
+                   'Isenções deferidas', 'Inscrições homologadas', 'FormaIngresso']]
     
     return final_df
 
 
 def diff(df1, df2, tipo="Curso"):
     
-    df11 = df1.groupby(tipo)[["Inscritos","Pagos", "Deferidas","Homologadas"]].sum().reset_index().sort_values(by='Inscritos', ascending=False)
+    df11 = df1.groupby(tipo)[["Inscritos","Pagos", "Isenções deferidas","Inscrições homologadas"]].sum().reset_index().sort_values(by='Inscritos', ascending=False)
     df11.set_index(tipo, inplace=True)
 
-    df22 = df2.groupby(tipo)[["Inscritos","Pagos", "Deferidas","Homologadas"]].sum().reset_index().sort_values(by='Inscritos', ascending=False)
+    df22 = df2.groupby(tipo)[["Inscritos","Pagos", "Isenções deferidas","Inscrições homologadas"]].sum().reset_index().sort_values(by='Inscritos', ascending=False)
     df22.set_index(tipo, inplace=True)
 
     dfdiff = df22 - df11
