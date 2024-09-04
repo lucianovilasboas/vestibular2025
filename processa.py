@@ -9,6 +9,7 @@ if __name__ == "__main__":
 
 
     # Define os caminhos das pastas
+    dados_folder = "./dados"
     input_folder = "./dados/input"
     processed_folder = "./dados/processed"
     backup_folder = "./dados/backup"
@@ -46,12 +47,15 @@ if __name__ == "__main__":
             if "Graduação" in first_row["Processo"]:
                 df = process_file_for_grad(file_path)
                 name_ext = "Superior"
+                tipo_ext = 'GRAD'
             elif "Integrados" in first_row["Processo"]:
                 df = process_file_for_tec(file_path)
                 name_ext = "Integrado"
+                tipo_ext = 'TEC'
             elif "Subsequentes" in first_row["Processo"]:
                 df = process_file_for_sub(file_path)
                 name_ext = "Subsequente"
+                tipo_ext = 'SUB'
             else:
                 print(f"{timestamp_str} - Arquivo {file} não foi processado. Formato não reconhecido.")
                 continue
@@ -67,6 +71,10 @@ if __name__ == "__main__":
             
             # Copia o arquivo para a pasta backup
             shutil.copy(file_path, os.path.join(backup_folder, new_file_name))
+            # Copia o arquivo para a pasta dados e renomeia para 
+            # 2025-1_GestaoResultado_ResumoInscricoes_X.xlsx
+            # com X sendo "GRAD", "TEC" ou "SUB" dependendo do tipo de curso na variavel name_ext
+            shutil.copy(file_path, os.path.join(dados_folder, f"2025-1_GestaoResultado_ResumoInscricoes_{tipo_ext}.xlsx"))
 
             # Move e renomeia o arquivo para a pasta processados
             shutil.move(file_path, new_file_path)
