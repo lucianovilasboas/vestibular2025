@@ -11,7 +11,7 @@ if repo.is_dirty(untracked_files=True):
     repo.git.add(all=True)
 
     # Mensagem de commit
-    commit_message = "Comitando com gitpython"  
+    commit_message = "Data update using gitrun.py"  
 
     # Faz o commit
     repo.index.commit(commit_message)

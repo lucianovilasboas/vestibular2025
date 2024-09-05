@@ -26,6 +26,10 @@ class MonitorArquivo(FileSystemEventHandler):
                 print(f"Existem 3 arquivos na pasta {self.pasta_input}. Executando o script.")
                 # Executa o comando se houver 3 arquivos na pasta
                 subprocess.run(["python", "processa.py"], shell=True)
+
+                # Executa o comando para comitar os arquivos no repositório
+                subprocess.run(["python", "gitrun.py"], shell=True) 
+
             else:
                 print(f"Existem {total_arquivos} arquivos na pasta {self.pasta_input}. Aguardando mais arquivos.")
 
