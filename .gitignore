@@ -25,6 +25,7 @@ backup/
 # Ignore testes.ipynb
 testes.ipynb
 
+
 # Ignore o arquivo cron.txt
 cron.txt
 
