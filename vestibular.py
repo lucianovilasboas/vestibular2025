@@ -35,11 +35,11 @@ df_all = pd.read_excel("dados/processed/all_data.xlsx")
 # st.dataframe( df_filtered )
 # st.balloons() 
 
-st.header(f'📈 Vestibular IFMG {ano}')
+st.header(f'✔️ Vestibular IFMG {ano}')
 st.write(f"Ultima atualização: {get_last_modified_file('dados/2025-1_GestaoResultado_ResumoInscricoes_Integrado.xlsx')}" )
 
 
-st.subheader(f'Total de Inscrições em {ano}', divider='rainbow')
+st.subheader(f'📊 Total de Inscrições em {ano}', divider='rainbow')
 # col0 = st.container()
 soma_colunas = df[["Inscritos", "Pagos", "Isenções deferidas", "Inscrições homologadas"]].sum()
 df_soma = pd.DataFrame(soma_colunas, columns=["total"]).reset_index()
@@ -80,10 +80,8 @@ with colb:
 
 
 
-st.subheader(f'Total de {situacao} no Campus {campus} em {ano}', divider='rainbow')
-
+st.subheader(f'📊 Total de {situacao} no Campus {campus} em {ano}', divider='rainbow')
 col2 = st.container()
-
 colc, cold = st.columns(2)
 with colc:
     modalidade = st.selectbox(
@@ -100,19 +98,19 @@ with cold:
         df_filtered_x["FormaIngresso"].sort_values().unique(),
         index=0,
     )    
-
+st.subheader(f'📈 Evolução de {situacao} no Campus {campus} em 2025-1', divider='rainbow')
 df_filtered2 = df_all[(df_all["Modalidade"] == modalidade) & (df_all["Campus"] == campus)&(df_all["FormaIngresso"] == forma)]
 col22 = st.container()
 
 
 
-st.subheader(f'Total de Inscrições por Cursos e campus (todo IFMG) em {ano}', divider='rainbow')
+st.subheader(f'📊 Total de Inscrições por Cursos e campus (todo IFMG) em {ano}', divider='rainbow')
 col1 = st.container()
 
-st.subheader(f'Total de Inscrições por Cursos (todo IFMG) em {ano}', divider='rainbow')
+st.subheader(f'📊 Total de Inscrições por Cursos (todo IFMG) em {ano}', divider='rainbow')
 col3 = st.container()
 
-st.subheader(f'Total de Inscrições por Campus em {ano}', divider='rainbow')
+st.subheader(f'📊 Total de Inscrições por Campus em {ano}', divider='rainbow')
 options_col4 = st.multiselect(
     "Situação da inscrição...",
     ["Inscritos","Pagos", "Isenções deferidas","Inscrições homologadas"],
@@ -120,11 +118,11 @@ options_col4 = st.multiselect(
 )
 col4 = st.container()
 
-st.subheader(f'Total de Inscrições por Edital em {ano}', divider='rainbow')
+st.subheader(f'📊 Total de Inscrições por Edital em {ano}', divider='rainbow')
 col10 = st.container()
 
 
-st.subheader(f'Comparando (Todo IFMG)', divider='blue')
+st.subheader(f'📊 Comparando (Todo IFMG)', divider='blue')
 
 col_ano1, col_ano2, options_col7 = st.columns(3)
    
@@ -152,10 +150,10 @@ with options_col7:
     )
 
 
-st.subheader(f'Técnico Integrado: evolução de {ano_sel1} para {ano_sel2}.', divider='rainbow')
+st.subheader(f'📊 Técnico Integrado: evolução de {ano_sel1} para {ano_sel2}.', divider='rainbow')
 col7 = st.container()
 
-st.subheader(f'Superior: evolução de {ano_sel1} para {ano_sel2}.', divider='rainbow')
+st.subheader(f'📊 Superior: evolução de {ano_sel1} para {ano_sel2}.', divider='rainbow')
 col8 = st.container()
 
 # st.subheader(f'Subsequente ({ano_sel1} com {ano_sel2})', divider='rainbow')
