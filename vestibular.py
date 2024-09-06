@@ -60,7 +60,7 @@ cola, colb = st.columns(2)
 
 with cola:
     campus = st.selectbox (
-    "Campus...",
+    "📶 Campus...",
         df["Campus"].sort_values().unique(),
     index=0,
     placeholder="Selecione o campus...",
@@ -71,7 +71,7 @@ df_filtered = df[ df['Campus']==campus ]
 
 with colb:
     situacao = st.selectbox(
-        "Situação da inscrição...",
+        "📶 Situação da inscrição...",
         ["Inscritos","Pagos", "Isenções deferidas","Inscrições homologadas"],
         index=3,
     )
@@ -85,7 +85,7 @@ col2 = st.container()
 colc, cold = st.columns(2)
 with colc:
     modalidade = st.selectbox(
-        "Modalidade...",
+        "📶 Modalidade...",
         df_filtered["Modalidade"].sort_values().unique(),
         index=0,
     )
@@ -94,7 +94,7 @@ df_filtered_x = df_filtered[ df_filtered['Modalidade']==modalidade ]
 
 with cold:
     forma = st.selectbox(
-        "Forma de ingresso...",
+        "📶 Forma de ingresso...",
         df_filtered_x["FormaIngresso"].sort_values().unique(),
         index=0,
     )    
@@ -112,9 +112,9 @@ col3 = st.container()
 
 st.subheader(f'📊 Total de Inscrições por Campus em {ano}', divider='rainbow')
 options_col4 = st.multiselect(
-    "Situação da inscrição...",
+    "📶 Situação da inscrição...",
     ["Inscritos","Pagos", "Isenções deferidas","Inscrições homologadas"],
-    ["Inscritos"], key='options_col4'
+    ["Inscritos"], key='options_col4',
 )
 col4 = st.container()
 
@@ -128,7 +128,7 @@ col_ano1, col_ano2, options_col7 = st.columns(3)
    
 with col_ano1:
     ano_sel1 = st.selectbox (
-    "Ano 1...",
+    "📶 Ano 1...",
         [ano0, ano1, ano2 ],
     index=1,
     placeholder="Selecione o ano 1...",
@@ -136,7 +136,7 @@ with col_ano1:
 
 with col_ano2:
     ano_sel2 = st.selectbox (
-    "Ano 2...",
+    "📶 Ano 2...",
         [ano2, ano1, ano0],
     index=0,
     placeholder="Selecione o ano 2...",
@@ -144,7 +144,7 @@ with col_ano2:
 
 with options_col7:
     options_col7 = st.multiselect(
-        "Situação da inscrição...",
+        "📶 Situação da inscrição...",
         ["Inscritos","Pagos", "Isenções deferidas","Inscrições homologadas"],
         ["Inscritos"], key='options_col7'
     )
