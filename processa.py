@@ -3,11 +3,10 @@ import os
 from datetime import datetime
 import shutil 
 from funcoes import process_file_for_subsequente, process_file_for_integrado, process_file_for_superior
-
+from log import logger
 
 if __name__ == "__main__":
-
-
+    
     # Define os caminhos das pastas
     dados_folder = "./dados"
     input_folder = "./dados/input"
@@ -23,9 +22,11 @@ if __name__ == "__main__":
         files = os.listdir(input_folder)
         if not files:
             print(f"{timestamp_str} - Nenhum arquivo encontrado na pasta input.")
+            logger.warn(f"Nenhum arquivo encontrado na pasta input.")
             exit()
-    except Exception:
+    except Exception as e:
         print(f"{timestamp_str} - Nenhum arquivo encontrado na pasta input.")
+        logger.warn(f"Nenhum arquivo encontrado na pasta input - {e}")
         exit()
 
     # lendo o dataframe final
@@ -55,6 +56,7 @@ if __name__ == "__main__":
                 name_ext = "Subsequente"
             else:
                 print(f"{timestamp_str} - Arquivo {file} não foi processado. Formato não reconhecido.")
+                logger.warn(f"Arquivo {file} não foi processado. Formato não reconhecido.")
                 continue
             
             # Registra o timestamp da leitura
@@ -77,6 +79,7 @@ if __name__ == "__main__":
             shutil.move(file_path, new_file_path)
             
             print(f"{timestamp_str} - Arquivo {file} processado e movido para {new_file_path}")
+            logger.info(f"Arquivo {file} processado e movido para {new_file_path}")
 
     csv_file_path = os.path.join(processed_folder, "all_data")
     df_all = pd.concat(dataframes)
@@ -84,3 +87,4 @@ if __name__ == "__main__":
     df_all.to_excel(f"{csv_file_path}.xlsx", index=False)
 
     print(f"{timestamp_str} - Todos os arquivos processados e movidos com sucesso!")
+    logger.info(f"Todos os arquivos processados e movidos com sucesso!")
