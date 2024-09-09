@@ -25,21 +25,21 @@ class MonitorArquivo(FileSystemEventHandler):
             
             # Verifica se existem 3 arquivos na pasta
             if total_arquivos == 3:
-                print(f"Existem 3 arquivos na pasta {self.pasta_input}. Executando o script.")
+                print(f"-> Existem 3 arquivos na pasta {self.pasta_input}. Executando o script.")
                 logger.info("Existem 3 arquivos na pasta %s. Executando o script.", self.pasta_input)
                 # Executa o comando se houver 3 arquivos na pasta
                 subprocess.run(["python", "processa.py"], shell=True)
 
-                # Executa o comando para comitar os arquivos no repositório
 
                 # Obtendo o horário atual para a mensagem de commit
                 horario_atual = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 mensagem_commit = f"Commit via gitrun.py em {horario_atual}"
                 git_cmd = ["python", "gitrun.py", "-m", mensagem_commit] 
+                # Executa o comando para comitar os arquivos no repositório
                 subprocess.run(git_cmd, shell=True) 
 
             else:
-                print(f"Existem {total_arquivos} arquivos na pasta {self.pasta_input}. Aguardando mais arquivos.")
+                print(f"-> Existem {total_arquivos} arquivos na pasta {self.pasta_input}. Aguardando mais arquivos.")
                 logger.info("Existem %s arquivos na pasta %s. Aguardando mais arquivos.", total_arquivos, self.pasta_input)
 
 # Função para iniciar a observação
@@ -48,7 +48,7 @@ def monitorar_pasta(caminho):
     observer = Observer()
     observer.schedule(event_handler, caminho, recursive=False)
     observer.start()
-    print(f"Monitorando a pasta: {caminho}")
+    print(f"=> Monitorando a pasta: {caminho}")
     logger.info("Monitorando a pasta: %s", caminho)
 
     try:

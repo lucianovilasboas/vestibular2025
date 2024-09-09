@@ -25,11 +25,9 @@ if __name__ == "__main__":
             "./dados/2025-1*",
         ])
 
-        # Mensagem de commit
-        commit_message = "Data update using gitrun.py"  
         # Faz o commit
         # command: git commit -m "Data update using git 
-        commit = repo.index.commit(commit_message)
+        commit = repo.index.commit(args.message)
 
         # Opcional: Push para o repositório remoto
         origin = repo.remote(name='origin')
