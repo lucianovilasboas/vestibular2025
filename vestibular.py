@@ -124,7 +124,7 @@ st.subheader(f'📊 Total de Inscrições por Edital em {ano}', divider='rainbow
 col10 = st.container()
 
 
-st.subheader(f'📊 Comparando (Todo IFMG)', divider='blue')
+st.subheader(f'📊 Comparando os processos (Todo IFMG)', divider='blue')
 
 col_ano1, col_ano2, options_col7 = st.columns(3)
    
@@ -176,6 +176,18 @@ fig2 = px.bar(df_filtered, x="Modalidade_Curso", y=situacao,  barmode="group", c
 fig2.update_xaxes(title='')
 fig2.update_yaxes(tickformat=",d")
 fig2.update_traces(texttemplate='%{value:.0f}')
+
+# Atualizar layout para mover a legenda para a parte inferior
+fig2.update_layout(
+    legend=dict(
+        orientation="h",  # Orientação horizontal
+        yanchor="bottom",  # Alinhar na parte inferior
+        y=-0.3,  # Posição no eixo Y (ajuste conforme necessário)
+        xanchor="center",  # Centralizar no eixo X
+        x=0.5  # Posição central no eixo X
+    )
+)
+
 col2.plotly_chart(fig2, use_container_width=True)
 
 
@@ -185,6 +197,17 @@ fig22.update_yaxes(tickformat=",d")
 # Exibe os valores no gráfico
 fig22.update_traces(texttemplate='%{text:.0f}', textposition="top right")
 fig22.update_layout(hovermode="x")
+# Atualizar layout para mover a legenda para a parte inferior
+fig22.update_layout(
+    legend=dict(
+        orientation="h",  # Orientação horizontal
+        yanchor="bottom",  # Alinhar na parte inferior
+        y=-0.3,  # Posição no eixo Y (ajuste conforme necessário)
+        xanchor="center",  # Centralizar no eixo X
+        x=0.5  # Posição central no eixo X
+    )
+)
+
 col22.plotly_chart(fig22, use_container_width=True)
 
 
@@ -194,6 +217,7 @@ fig1 = px.bar(df.sort_values(by='Curso'), x="Modalidade_Curso", y="Inscritos", c
 fig1.update_xaxes(title='')
 fig1.update_yaxes(tickformat=",d")
 fig1.update_traces(texttemplate='%{value:.0f}')
+fig1.update_layout(showlegend=False)
 col1.plotly_chart(fig1, use_container_width=True)
 
 
