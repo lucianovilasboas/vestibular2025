@@ -194,6 +194,10 @@ col2.plotly_chart(fig2, use_container_width=True)
 fig22 = px.line(df_filtered2, title=f"Campus {campus}", x="Timestamp", y=situacao, color="Curso", text=situacao)
 fig22.update_xaxes(title='')
 fig22.update_yaxes(tickformat=",d")
+
+# fonte size do texto dos valores
+fig22.update_traces(textfont_size=8)
+
 # Exibe os valores no gráfico
 fig22.update_traces(texttemplate='%{text:.0f}', textposition="top right")
 fig22.update_layout(hovermode="x")
