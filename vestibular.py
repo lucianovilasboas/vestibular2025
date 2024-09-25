@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd 
 import plotly.express as px
 from funcoes import process_file_for_integrado, process_file_for_superior, process_file_for_subsequente, diff, get_last_modified_file 
-
+from funcoes import load_data
 
 st.set_page_config(page_title="Vestibular IFMG 2025",  page_icon="📊", layout="wide")
 
@@ -30,7 +30,7 @@ else:
 df['Modalidade_Curso'] = df['Modalidade'].apply(lambda x: str(x)[:3]) + ' - ' + df['Curso'] 
 
 
-df_all = pd.read_excel("dados/processed/all_data.xlsx")
+df_all = load_data()
 
 # st.dataframe( df_filtered )
 # st.balloons() 
@@ -102,7 +102,9 @@ with cold:
         index=0,
     )    
 st.subheader(f'📈 Evolução de {situacao} no Campus {campus} em 2025-1', divider='rainbow')
+
 df_filtered2 = df_all[(df_all["Modalidade"] == modalidade) & (df_all["Campus"] == campus)&(df_all["FormaIngresso"] == forma)]
+
 col22 = st.container()
 
 
@@ -197,7 +199,7 @@ fig22.update_xaxes(title='')
 fig22.update_yaxes(tickformat=",d")
 
 # fonte size do texto dos valores
-fig22.update_traces(textfont_size=8)
+fig22.update_traces(textfont_size=10)
 
 # Exibe os valores no gráfico
 fig22.update_traces(texttemplate='%{text:.0f}', textposition="top right")

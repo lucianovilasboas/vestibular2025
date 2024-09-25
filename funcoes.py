@@ -2,6 +2,7 @@ import pandas as pd
 import os
 from datetime import datetime
 import pytz
+import streamlit as st
 
 def process_file_for_superior(file_path):
     """
@@ -144,3 +145,34 @@ def get_last_modified_file(path):
     data_modificacao = data_modificacao.astimezone(fuso_horario)
 
     return data_modificacao.strftime("%d/%m/%Y %H:%M:%S")
+
+
+# Função para amostrar por intervalo regular com dois valores por dia
+def amostrar_dois_por_dia(df):
+    # Função auxiliar para amostrar dois valores por dia, mantendo o primeiro e o último Timestamp
+    def amostrar_grupo(grupo):
+        # Adiciona uma coluna 'Data' extraída de 'Timestamp' para agrupar por dia
+        grupo['Data'] = grupo['Timestamp'].dt.date
+        
+        # Função para garantir dois registros por dia (primeiro e último do dia)
+        def amostrar_dia(dia_grupo):
+            if len(dia_grupo) > 2:
+                return pd.concat([dia_grupo.iloc[[0]], dia_grupo.iloc[[-1]]])
+            else:
+                return dia_grupo
+        
+        # Aplica a função de amostragem a cada dia
+        return grupo.groupby('Data', group_keys=False).apply(amostrar_dia).drop(columns='Data')
+    
+    # Agrupa por 'Campus' e 'Curso' e aplica a amostragem de dois valores por dia
+    amostrado = df.groupby(['Campus', 'Curso','Modalidade','FormaIngresso'], group_keys=False).apply(amostrar_grupo).reset_index(drop=True)
+    
+    return amostrado.sort_values(by='Timestamp')
+
+
+
+
+@st.cache_data
+def load_data():
+    df_all = pd.read_excel("dados/processed/all_data.xlsx")
+    return amostrar_dois_por_dia(df_all)
