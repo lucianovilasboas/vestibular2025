@@ -36,7 +36,8 @@ df_all = pd.read_excel("dados/processed/all_data.xlsx")
 # st.balloons() 
 
 st.header(f'✔️ Vestibular IFMG {ano}')
-st.write(f"Ultima atualização: {get_last_modified_file('dados/2025-1_GestaoResultado_ResumoInscricoes_Integrado.xlsx')}" )
+html_code = f"<div id=\"update\">Ultima atualização: {get_last_modified_file('dados/2025-1_GestaoResultado_ResumoInscricoes_Integrado.xlsx')}</div>"
+st.markdown(html_code, unsafe_allow_html=True)
 st.warning('Importante! Para esse levantamento estamos considerando apenas a primeira opção de curso do candidato.', icon="⚠️")
 
 
