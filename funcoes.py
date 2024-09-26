@@ -172,7 +172,7 @@ def amostrar_dois_por_dia(df):
 
 
 
-@st.cache_data(ttl=3600) # Força a atualização do cache a cada 1 hora
+@st.cache_data(ttl=3600) # Força a atualização do cache a cada 1 hora (3600 segundos)
 def load_data(filtrar=True):
     df_all = pd.read_excel("dados/processed/all_data.xlsx")
     if filtrar: 
