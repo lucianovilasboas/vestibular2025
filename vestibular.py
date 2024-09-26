@@ -30,8 +30,8 @@ else:
 df['Modalidade_Curso'] = df['Modalidade'].apply(lambda x: str(x)[:3]) + ' - ' + df['Curso'] 
 
 
-df_all = load_data()
-
+df_all = load_data(filtrar=True) 
+ 
 # st.dataframe( df_filtered )
 # st.balloons() 
 
