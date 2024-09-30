@@ -33,12 +33,12 @@ driver.maximize_window()
 # Preenche o campo de login
 username_input = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "txtEmail")))
 if (username_input.is_displayed()):
-    username_input.send_keys("49097067634")
+    username_input.send_keys("") # iserir o codigo de acesso
 
 # Preenche o campo de senha
 password_input = driver.find_element(By.ID, "txtSenha")
 if(password_input.is_displayed()):
-    password_input.send_keys("IFMG2024*")
+    password_input.send_keys("") # iseir a senha
 
 # Clica no botão de login
 login_button = driver.find_element(By.ID, "cmdEntrar")
