@@ -6,6 +6,11 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 from log import logger
+import streamlit as st
+
+# Acessar diretamente uma variável de ambiente
+username = st.secrets["CEFET_MINAS_USER"]
+password = st.secrets["CEFET_MINAS_PASS"]
 
 # Configurar a pasta de download
 download_dir = "D:\\Dev\\DataScience\\vestibular\\dados\\input"
@@ -20,6 +25,11 @@ prefs = {
 }
 chrome_options.add_experimental_option("prefs", prefs)
 
+# Configurações para o modo headless
+chrome_options.add_argument("--headless")  # Executa sem interface gráfica
+chrome_options.add_argument("--disable-gpu")  # Necessário em alguns sistemas
+chrome_options.add_argument("--no-sandbox")  # Segurança para o ambiente de execução
+
 # Configurando o ChromeDriver
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
 
@@ -33,12 +43,12 @@ driver.maximize_window()
 # Preenche o campo de login
 username_input = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "txtEmail")))
 if (username_input.is_displayed()):
-    username_input.send_keys("") # iserir o codigo de acesso
+    username_input.send_keys(username)
 
 # Preenche o campo de senha
 password_input = driver.find_element(By.ID, "txtSenha")
 if(password_input.is_displayed()):
-    password_input.send_keys("") # iseir a senha
+    password_input.send_keys(password)
 
 # Clica no botão de login
 login_button = driver.find_element(By.ID, "cmdEntrar")

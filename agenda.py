@@ -26,7 +26,7 @@ def executar():
 
 if __name__ == "__main__":
     logger.info("Iniciando agendamento...")
-    agendamentos = ["07:00", "12:00", "18:00" ,"22:00"] 
+    agendamentos = ["07:00","10:00", "13:00","16:00", "19:00" ,"22:00"] 
     for i, a in enumerate(agendamentos):
         text = f"{i+1}° agendamento para {a}"
         print(text)
