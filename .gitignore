@@ -34,3 +34,7 @@ dados/*.xls
 
 
 logs.log
+
+.streamlit/
+
+automacao.py
